@@ -8,5 +8,5 @@ class Grade extends Model
 {
     protected $fillable=['id','grade_name'];
     protected $table= "grades";
-    protected $hidden = ["id"];
+    protected $hidden = ["created_at"];
 }

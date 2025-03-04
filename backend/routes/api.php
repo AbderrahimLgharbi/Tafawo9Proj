@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\DomaineController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AdministrationController;
 
@@ -14,10 +16,25 @@ Route::post('/register',[AuthUserController::class,'register']);
 Route::post('/logout',[AuthUserController::class,'logout'])->middleware("auth:sanctum");
 
 
-Route::group([],function(){
+Route::prefix('administration')->group(function(){
     Route::post("create",[AdministrationController::class,'create']);
-    Route::post("update",[AdministrationController::class,'update']);
+    Route::put("update",[AdministrationController::class,'update']);
     Route::post("delete",[AdministrationController::class,'delete']);
-    Route::post("getAll",[AdministrationController::class,'getAll']);
+    Route::get("getAll",[AdministrationController::class,'getAll']);
 
+});
+
+Route::prefix('grade')->group(function(){
+    Route::post("create",[GradeController::class,'create']);
+    Route::put("update",[GradeController::class,'update']);
+    Route::post("delete",[GradeController::class,'delete']);
+    Route::get("getAll",[GradeController::class,'getAll']);
+
+});
+
+Route::prefix('domaine')->group(function(){
+    Route::post("create",[DomaineController::class,'create']);
+    Route::put("update",[DomaineController::class,'update']);
+    Route::post("delete",[DomaineController::class,'delete']);
+    Route::get("getAll",[DomaineController::class,'getAll']);
 });

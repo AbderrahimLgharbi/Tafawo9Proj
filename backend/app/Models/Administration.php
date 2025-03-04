@@ -8,7 +8,7 @@ class Administration extends Model
 {
     protected $fillable=['id','administration_name'];
     protected $table= "administrations";
-    protected $hidden = ["created_at","id"];
+    protected $hidden = ["created_at"];
     // public $timestamps = false;
 
 
