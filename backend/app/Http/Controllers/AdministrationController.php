@@ -91,4 +91,32 @@ class AdministrationController extends Controller
         }
     }
 
+    public function delete(Request $request){
+
+
+        try {
+
+        $adminis=Administration::find($request->id);
+
+
+            // Check if the record is created successfully
+            if (!$adminis) {
+                return response()->json([
+                    'msg' => 'Administration not deleted',
+                    'errors' => ['general' => 'Unknown error occurred during creation'],
+                ], 500); // 500 Internal Server Error
+            }
+
+            $adminis->delete();
+            return response()->json([
+                'msg' => 'Administration deleted successfully',
+                'data' => $adminis,
+            ], 201); // 201 Created
+        } catch (\Exception $e) {
+            return response()->json([
+                'msg' => 'Server Error',
+                'errors' => ['exception' => $e->getMessage()],
+            ], 500); // 500 Internal Server Error
+        }
+    }
 }

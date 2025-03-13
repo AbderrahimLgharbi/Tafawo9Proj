@@ -19,7 +19,7 @@ Route::post('/logout',[AuthUserController::class,'logout'])->middleware("auth:sa
 Route::prefix('administration')->group(function(){
     Route::post("create",[AdministrationController::class,'create']);
     Route::put("update",[AdministrationController::class,'update']);
-    Route::post("delete",[AdministrationController::class,'delete']);
+    Route::delete("delete",[AdministrationController::class,'delete']);
     Route::get("getAll",[AdministrationController::class,'getAll']);
 
 });
@@ -27,7 +27,7 @@ Route::prefix('administration')->group(function(){
 Route::prefix('grade')->group(function(){
     Route::post("create",[GradeController::class,'create']);
     Route::put("update",[GradeController::class,'update']);
-    Route::post("delete",[GradeController::class,'delete']);
+    Route::delete("delete",[GradeController::class,'delete']);
     Route::get("getAll",[GradeController::class,'getAll']);
 
 });
@@ -35,6 +35,6 @@ Route::prefix('grade')->group(function(){
 Route::prefix('domaine')->group(function(){
     Route::post("create",[DomaineController::class,'create']);
     Route::put("update",[DomaineController::class,'update']);
-    Route::post("delete",[DomaineController::class,'delete']);
+    Route::delete("delete",[DomaineController::class,'delete']);
     Route::get("getAll",[DomaineController::class,'getAll']);
 });
