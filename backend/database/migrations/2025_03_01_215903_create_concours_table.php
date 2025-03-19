@@ -13,19 +13,21 @@ return new class extends Migration
     {
         Schema::create('concours', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("admininstration_id");
+            $table->unsignedBigInteger("administration_id");
             $table->unsignedBigInteger("domaine_id");
             $table->unsignedBigInteger("grade_id");
 
             $table->string("counc_name")->nullable();
-            $table->binary("conc_pdf");
+            $table->string('conc_pdf')->nullable();
+            $table->string('generated_name')->nullable();
+            $table->string('concour_pdf_correction')->nullable();
+            $table->string('generated_name_corr')->nullable();
             $table->boolean('is_corrected')->default(false);
-            $table->binary("concour_pdf_correction");
             $table->timestamp('submitted_at')->nullable(); // When the contest was submitted
             $table->enum('status', ['pending', 'in_review', 'completed', 'archived'])->default('pending'); // Status of the contest
             $table->text('feedback')->nullable(); // Feedback field to store reviewer notes
 
-            $table->foreign('admininstration_id')
+            $table->foreign('administration_id')
             ->references('id')->on('administrations')->onDelete('cascade');
             $table->foreign('domaine_id')
             ->references('id')->on('domaines')->onDelete('cascade');

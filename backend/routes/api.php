@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\ConcourController;
 use App\Http\Controllers\DomaineController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AdministrationController;
@@ -38,3 +39,12 @@ Route::prefix('domaine')->group(function(){
     Route::delete("delete",[DomaineController::class,'delete']);
     Route::get("getAll",[DomaineController::class,'getAll']);
 });
+
+Route::prefix('concours')->group(
+    function(){
+        Route::get("index",[ConcourController::class,'index']);
+        Route::post("add",[ConcourController::class,'create']);
+        Route::post("create",[ConcourController::class,'upload']);
+        // Route::get("{file}/download",[ConcourController::class,'download']);
+    }
+);
