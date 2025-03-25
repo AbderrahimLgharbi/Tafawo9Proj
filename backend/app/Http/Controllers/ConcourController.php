@@ -11,8 +11,8 @@ class ConcourController extends Controller
 {
     public function index()
     {
-        $concours = Concour::all();
-        return response()->json(['conc'=>$concours]);
+        $concours = Concour::paginate(6);
+        return response()->json($concours);
     }
 
     public function create(Request $request){
@@ -34,8 +34,8 @@ class ConcourController extends Controller
                 $fileType=$file->getClientOriginalExtension();
                 // uploadfile
                 $request->file->move(public_path('upload'),$fileName);
-                
-                
+
+
                 // correction Concours
                 $fileNamecorr = null;
                 if ($request->hasFile('concour_pdf_correction')) {
@@ -46,7 +46,7 @@ class ConcourController extends Controller
                     // Upload correction file
                     $filecorrection->move(public_path('uploadsCorrection'), $fileNamecorr);
                 }
-            
+
             $conc = Concour::create([
                 'administration_id' => $validatedData['administration_id'],
                 'domaine_id' => $validatedData['domaine_id'],
@@ -79,6 +79,34 @@ class ConcourController extends Controller
             ], 500); // 500 Internal Server Error
         }
     }
+
+
+    public function search(Request $request)
+    {
+        $domain = $request->input('domain');
+        $administration = $request->input('administration');
+        $grade = $request->input('grade');
+
+        $concoures = Concour::query();
+
+        if ($domain) {
+            $concoures->where('domaine_id', $domain);
+        }
+
+        if ($administration) {
+            $concoures->where('administration_id', $administration);
+        }
+
+        if ($grade) {
+            $concoures->where('grade_id', $grade);
+        }
+
+        $results = $concoures->get();
+
+        return response()->json($results);
+    }
+
+
 
 
     // public function upload(Request $request){

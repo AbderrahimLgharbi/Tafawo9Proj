@@ -45,6 +45,6 @@ Route::prefix('concours')->group(
         Route::get("index",[ConcourController::class,'index']);
         Route::post("add",[ConcourController::class,'create']);
         Route::post("create",[ConcourController::class,'upload']);
-        // Route::get("{file}/download",[ConcourController::class,'download']);
+        Route::get("search",[ConcourController::class,'search']);
     }
 );

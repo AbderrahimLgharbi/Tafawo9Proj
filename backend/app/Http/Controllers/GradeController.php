@@ -47,9 +47,7 @@ class GradeController extends Controller
                 ], 500); // 500 Internal Server Error
             }
 
-            return response()->json([
-                'data' => $grades,
-            ], 201); // 201 Created
+            return response()->json($grades); // 201 Created
             }
         catch(\Exception $e){
             return response()->json([
